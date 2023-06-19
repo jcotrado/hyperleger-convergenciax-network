@@ -1,0 +1,42 @@
+# Copyright ConvergenciaX Spa.
+# Autor: Joel Cotrado Vargas <joel.cotrado@gmail.com>
+# Date: 01-12-2022
+#
+
+OrdererOrgs:
+    - Name: Orderer
+      Domain: convergenciax.com
+      EnableNodeOUs: true
+      Specs:
+        - Hostname: orderer
+          SANS:
+            - localhost
+PeerOrgs:
+    - Name: Org1
+      Domain: org1.convergenciax.com
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+    - Name: Org2
+      Domain: org2.convergenciax.com
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+    - Name: Org3
+      Domain: org3.convergenciax.com
+      EnableNodeOUs: true    
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+  
