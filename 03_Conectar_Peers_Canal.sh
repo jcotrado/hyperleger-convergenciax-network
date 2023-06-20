@@ -17,7 +17,6 @@ export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric
 echo $CORE_PEER_MSPCONFIGPATH
 echo $CORE_PEER_ADDRESS
 echo $CORE_PEER_LOCALMSPID
-
 echo $CORE_PEER_TLS_ROOTCERT_FILE
 
 #echo $CORE_PEER_TLS_CERT_FILE
