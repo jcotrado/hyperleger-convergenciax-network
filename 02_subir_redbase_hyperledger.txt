@@ -1,0 +1,102 @@
+jcotrado@convergencia2:~/HLFconvergenciax/convergenciax-network$ ./02_Subir_redbase_dockers+monitoreo.sh
+portainer_data
+Unable to find image 'portainer/portainer:latest' locally
+latest: Pulling from portainer/portainer
+772227786281: Pull complete
+96fd13befc87: Pull complete
+0bad1d247b5b: Pull complete
+b5d1b01b1d39: Pull complete
+Digest: sha256:47b064434edf437badf7337e516e07f64477485c8ecc663ddabbe824b20c672d
+Status: Downloaded newer image for portainer/portainer:latest
+c467793d0a4cab2ecc60c5c4ba5914e16a3ecab6552d364e561066779e591488
+marketplace
+true
+/home/jcotrado/HLFconvergenciax/convergenciax-network
+Creating network "convergenciax-network_basic" with the default driver
+Pulling couchdb0 (couchdb:3.1)...
+3.1: Pulling from library/couchdb
+8b91b88d5577: Pull complete
+19dce64dc1d9: Pull complete
+cb6fb9915655: Pull complete
+9a50c5202daa: Pull complete
+fd650c9b2081: Pull complete
+a22c2981ce80: Pull complete
+81596bdfad92: Pull complete
+19c0b99740b5: Pull complete
+f2c86518fe51: Pull complete
+c3dc7f68ec82: Pull complete
+64d80149eff3: Pull complete
+Digest: sha256:9f3e6bf527b7075d72dfac1d1d1dd722cbe5597b3b9d69dd25a68108899726b7
+Status: Downloaded newer image for couchdb:3.1
+Creating ca.org1.convergenciax.com ... done
+Creating couchdb2                  ... done
+Creating orderer.convergenciax.com ... done
+Creating couchdb1                  ... done
+Creating couchdb0                  ... done
+Creating peer0.org2.convergenciax.com ... done
+Creating peer0.org3.convergenciax.com ... done
+Creating peer0.org1.convergenciax.com ... done
+Creating cli                          ... done
+jcotrado@convergencia2:~/HLFconvergenciax/convergenciax-network$ CHANNEL_NAME=$CHANNEL_NAME docker-compose -f docker-compose-cli-couchdb.^C
+jcotrado@convergencia2:~/HLFconvergenciax/convergenciax-network$ CHANNEL_NAME=$CHANNEL_NAME docker-compose -f docker-compose-cli-couchdb.yaml down
+Stopping cli                          ... done
+Stopping peer0.org1.convergenciax.com ... done
+Stopping peer0.org3.convergenciax.com ... done
+Stopping peer0.org2.convergenciax.com ... done
+Stopping orderer.convergenciax.com    ... done
+Stopping couchdb1                     ... done
+Stopping couchdb0                     ... done
+Stopping couchdb2                     ... done
+Stopping ca.org1.convergenciax.com    ... done
+Removing cli                          ... done
+Removing peer0.org1.convergenciax.com ... done
+Removing peer0.org3.convergenciax.com ... done
+Removing peer0.org2.convergenciax.com ... done
+Removing orderer.convergenciax.com    ... done
+Removing couchdb1                     ... done
+Removing couchdb0                     ... done
+Removing couchdb2                     ... done
+Removing ca.org1.convergenciax.com    ... done
+Removing network convergenciax-network_basic
+jcotrado@convergencia2:~/HLFconvergenciax/convergenciax-network$ CHANNEL_NAME=$CHANNEL_NAME docker-compose -f docker-compose-cli-couchdb.yaml up -d
+Creating network "convergenciax-network_basic" with the default driver
+Creating couchdb2                  ... done
+Creating couchdb1                     ... done
+Creating ca.org1.convergenciax.com ... done
+Creating orderer.convergenciax.com ... done
+Creating couchdb0                  ... done
+Creating peer0.org3.convergenciax.com ... done
+Creating peer0.org1.convergenciax.com ... done
+Creating peer0.org2.convergenciax.com ... done
+Creating cli                          ... done
+jcotrado@convergencia2:~/HLFconvergenciax/convergenciax-network$ docker run -d -p 8000:8000 -p 9000:9000 --name portainer -
+-restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ee:latest
+Unable to find image 'portainer/portainer-ee:latest' locally
+latest: Pulling from portainer/portainer-ee
+772227786281: Already exists
+96fd13befc87: Already exists
+5171176db7f2: Pull complete
+a143fdc4fa02: Pull complete
+b622730c7bdc: Pull complete
+c1cad9f5200f: Pull complete
+f5d41fd895f5: Pull complete
+baa864fd4e69: Pull complete
+e972d1ee1240: Pull complete
+5cb15fe39640: Pull complete
+4f4fb700ef54: Pull complete
+Digest: sha256:19c138682574830bac6538e5f9345baae7059d77abff5effce3930c0d2b4f063
+Status: Downloaded newer image for portainer/portainer-ee:latest
+4418f7b8980765f7f8f12b71ea9f5234d60d37faa8b245a095f07eb6db321994
+docker: Error response from daemon: driver failed programming external connectivity on endpoint portainer (79fe4cb80327a88c1b01491fdb0e499324c9d84e18d8990cf76ac8a973e0b993): Bind for 0.0.0.0:9000 failed: port is already allocated.
+jcotrado@convergencia2:~/HLFconvergenciax/convergenciax-network$ docker run --rm httpd:2.4-alpine htpasswd -nbB admin "admin" | cut -d ":" -f 2
+Unable to find image 'httpd:2.4-alpine' locally
+2.4-alpine: Pulling from library/httpd
+31e352740f53: Pull complete
+ec139fe14694: Pull complete
+fd0a7d757a33: Pull complete
+8f3d6aa86b7c: Pull complete
+a1adb2f7e6ea: Pull complete
+4d127a67555b: Pull complete
+Digest: sha256:08792333fe72e072ccc7d658099c665d8261a4d5f960b0adcbafdcc0780eb66d
+Status: Downloaded newer image for httpd:2.4-alpine
+$2y$05$9JgK/OxrEoQP0XRtGz1PsOmxzj8zDCDqnSoJNMYYfaaVETlSnlIze
