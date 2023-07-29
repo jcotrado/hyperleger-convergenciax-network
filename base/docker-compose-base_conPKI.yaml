@@ -20,6 +20,7 @@ services:
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
       # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
+      #- ORDERER_GENERAL_TLS_ENABLED=false
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
@@ -28,9 +29,9 @@ services:
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     # ---CHANGED--- the path is different to reflect our company's domain
-    - ../crypto-config/ordererOrganizations/convergenciax.com/orderers/orderer.convergenciax.com/msp:/var/hyperledger/orderer/msp
+    - ../../external-ca/pki-ca/convergenciax.com/orderers/orderer.convergenciax.com/msp:/var/hyperledger/orderer/msp
     # ---CHANGED--- the path is different to reflect our company's domain
-    - ../crypto-config/ordererOrganizations/convergenciax.com/orderers/orderer.convergenciax.com/tls/:/var/hyperledger/orderer/tls
+    - ../../external-ca/pki-ca/convergenciax.com/orderers/orderer.convergenciax.com/tls:/var/hyperledger/orderer/tls
     ports:
       - 7050:7050
 
@@ -54,9 +55,9 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         # ---CHANGED--- changed to reflect peer name, org name and our company's domain
-        - ../crypto-config/peerOrganizations/org1.convergenciax.com/peers/peer0.org1.convergenciax.com/msp:/etc/hyperledger/fabric/msp
+        - ../../external-ca/pki-ca/org1.convergenciax.com/peers/peer0.org1.convergenciax.com/msp:/etc/hyperledger/fabric/msp
         # ---CHANGED--- changed to reflect peer name, org name and our company's domain
-        - ../crypto-config/peerOrganizations/org1.convergenciax.com/peers/peer0.org1.convergenciax.com/tls:/etc/hyperledger/fabric/tls
+        - ../../external-ca/pki-ca/org1.convergenciax.com/peers/peer0.org1.convergenciax.com/tls:/etc/hyperledger/fabric/tls
     ports:
       - 7051:7051
       - 7053:7053
@@ -82,9 +83,9 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         # ---CHANGED--- changed to reflect peer name, org name and our company's domain
-        - ../crypto-config/peerOrganizations/org2.convergenciax.com/peers/peer0.org2.convergenciax.com/msp:/etc/hyperledger/fabric/msp
+        - ../../external-ca/pki-ca/org2.convergenciax.com/peers/peer0.org2.convergenciax.com/msp:/etc/hyperledger/fabric/msp
         # ---CHANGED--- changed to reflect peer name, org name and our company's domain
-        - ../crypto-config/peerOrganizations/org2.convergenciax.com/peers/peer0.org2.convergenciax.com/tls:/etc/hyperledger/fabric/tls
+        - ../../external-ca/pki-ca/org2.convergenciax.com/peers/peer0.org2.convergenciax.com/tls:/etc/hyperledger/fabric/tls
 
     ports:
       - 8051:7051
@@ -111,9 +112,9 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         # ---CHANGED--- changed to reflect peer name, org name and our company's domain
-        - ../crypto-config/peerOrganizations/org3.convergenciax.com/peers/peer0.org3.convergenciax.com/msp:/etc/hyperledger/fabric/msp
+        - ../../external-ca/pki-ca/org3.convergenciax.com/peers/peer0.org3.convergenciax.com/msp:/etc/hyperledger/fabric/msp
         # ---CHANGED--- changed to reflect peer name, org name and our company's domain
-        - ../crypto-config/peerOrganizations/org3.convergenciax.com/peers/peer0.org3.convergenciax.com/tls:/etc/hyperledger/fabric/tls
+        - ../../external-ca/pki-ca/org3.convergenciax.com/peers/peer0.org3.convergenciax.com/tls:/etc/hyperledger/fabric/tls
     ports:
       - 9051:7051
       - 9053:7053

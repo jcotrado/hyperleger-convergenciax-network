@@ -1,0 +1,1 @@
+docker-compose -f docker-compose-cli-couchdb_conPKI.yaml down
