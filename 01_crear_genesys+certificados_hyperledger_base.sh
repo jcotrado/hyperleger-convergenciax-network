@@ -14,6 +14,8 @@ echo $CHANNEL_NAME
 rm -rf $FABRIC_CFG_PATH/crypto-config
 rm -rf $FABRIC_CFG_PATH/channel-artifacts
 
+cp configtx_sinPKI.yaml configtx.yaml
+
 echo "************************************************************************"
 echo "crear Material Cryptografico"
 echo "************************************************************************"
