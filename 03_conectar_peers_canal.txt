@@ -1,0 +1,454 @@
+#############################################################################
+# Ejecutar creación de canal y conectar los 3 peers/ Organizaciones
+#############################################################################
+
+##
+# Paso 1 - crear canal marketplace, asociado a Org1
+##
+
+
+jcotrado@convergencia2:~$ docker exec -ti -e CHANNEL_NAME=marketplace cli /bin/bash
+bash-5.0# 
+bash-5.0# 
+bash-5.0# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp
+bash-5.0# export CORE_PEER_ADDRESS=peer0.org1.convergenciax.com:7051
+bash-5.0# export CORE_PEER_LOCALMSPID="Org1MSP"
+bash-5.0# export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/peers/peer0.org1.convergenciax.com/tls/ca.crt
+bash-5.0# 
+bash-5.0# echo $CORE_PEER_MSPCONFIGPATH
+/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp
+bash-5.0# echo $CORE_PEER_ADDRESS
+peer0.org1.convergenciax.com:7051
+bash-5.0# echo $CORE_PEER_LOCALMSPID
+Org1MSP
+bash-5.0# echo $CORE_PEER_TLS_ROOTCERT_FILE
+/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/peers/peer0.org1.convergenciax.com/tls/ca.crt
+bash-5.0# 
+bash-5.0# peer channel create -o orderer.convergenciax.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/convergenciax.com/orderers/orderer.convergenciax.com/msp/tlscacerts/tlsca.convergenciax.com-cert.pem
+2023-06-22 16:54:14.630 UTC [bccsp] GetDefault -> DEBU 001 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 16:54:14.737 UTC [bccsp] GetDefault -> DEBU 002 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 16:54:14.751 UTC [bccsp_sw] openKeyStore -> DEBU 003 KeyStore opened at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/keystore]...done
+2023-06-22 16:54:14.752 UTC [msp] getPemMaterialFromDir -> DEBU 004 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/signcerts
+2023-06-22 16:54:14.753 UTC [msp] getPemMaterialFromDir -> DEBU 005 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/signcerts/Admin@org1.convergenciax.com-cert.pem
+2023-06-22 16:54:14.753 UTC [msp] getPemMaterialFromDir -> DEBU 006 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/cacerts
+2023-06-22 16:54:14.753 UTC [msp] getPemMaterialFromDir -> DEBU 007 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/cacerts/ca.org1.convergenciax.com-cert.pem
+2023-06-22 16:54:14.753 UTC [msp] getPemMaterialFromDir -> DEBU 008 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/admincerts
+2023-06-22 16:54:14.753 UTC [msp] getPemMaterialFromDir -> DEBU 009 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/intermediatecerts
+2023-06-22 16:54:14.753 UTC [msp] getMspConfig -> DEBU 00a Intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/intermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/intermediatecerts: no such file or directory]
+2023-06-22 16:54:14.756 UTC [msp] getPemMaterialFromDir -> DEBU 00b Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlscacerts
+2023-06-22 16:54:14.758 UTC [msp] getPemMaterialFromDir -> DEBU 00c Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlscacerts/tlsca.org1.convergenciax.com-cert.pem
+2023-06-22 16:54:14.760 UTC [msp] getPemMaterialFromDir -> DEBU 00d Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlsintermediatecerts
+2023-06-22 16:54:14.760 UTC [msp] getMspConfig -> DEBU 00e TLS intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlsintermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlsintermediatecerts: no such file or directory]
+2023-06-22 16:54:14.766 UTC [msp] getPemMaterialFromDir -> DEBU 00f Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/crls
+2023-06-22 16:54:14.766 UTC [msp] getMspConfig -> DEBU 010 crls folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/crls]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/crls: no such file or directory]
+2023-06-22 16:54:14.773 UTC [msp] getMspConfig -> DEBU 011 Loading NodeOUs
+2023-06-22 16:54:14.773 UTC [msp] newBccspMsp -> DEBU 012 Creating BCCSP-based MSP instance
+2023-06-22 16:54:14.777 UTC [msp] New -> DEBU 013 Creating Cache-MSP instance
+2023-06-22 16:54:14.777 UTC [msp] loadLocalMSP -> DEBU 014 Created new local MSP
+2023-06-22 16:54:14.777 UTC [msp] Setup -> DEBU 015 Setting up MSP instance Org1MSP
+2023-06-22 16:54:14.778 UTC [msp.identity] newIdentity -> DEBU 016 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICajCCAg+gAwIBAgIQQsfEwi4+ewwVPzVpgGSMEzAKBggqhkjOPQQDAjB/MQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzEfMB0GA1UEChMWb3JnMS5jb252ZXJnZW5jaWF4LmNvbTEiMCAGA1UE
+AxMZY2Eub3JnMS5jb252ZXJnZW5jaWF4LmNvbTAeFw0yMzA2MjIxNjExMDBaFw0z
+MzA2MTkxNjExMDBaMH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlh
+MRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZvcmcxLmNvbnZlcmdl
+bmNpYXguY29tMSIwIAYDVQQDExljYS5vcmcxLmNvbnZlcmdlbmNpYXguY29tMFkw
+EwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEqpm28bj7J3mwXnNF6AWK5Ufk3j+JG12M
+03gHA3leg2JiOVXvsOkXgTNIOK6CADGSgBLePaxlqFoKkU3oEMSKkqNtMGswDgYD
+VR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNV
+HRMBAf8EBTADAQH/MCkGA1UdDgQiBCDgFbuSVm28+bhMQw81o8kPitnnwFete2Lp
+kfL/sO4pCzAKBggqhkjOPQQDAgNJADBGAiEAwKY/qf6CrfkXMPlN9hCA5MfPPW9L
+QJE/rDiAFeEN6tMCIQCJimmPYmOwdjzLYDeFrgDF0o2XPfQPi/N3Bmhii4A5mQ==
+-----END CERTIFICATE-----
+2023-06-22 16:54:14.794 UTC [msp.identity] newIdentity -> DEBU 017 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICOjCCAeGgAwIBAgIQcbnZDYNjbwGQvm7fndfDiDAKBggqhkjOPQQDAjB/MQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzEfMB0GA1UEChMWb3JnMS5jb252ZXJnZW5jaWF4LmNvbTEiMCAGA1UE
+AxMZY2Eub3JnMS5jb252ZXJnZW5jaWF4LmNvbTAeFw0yMzA2MjIxNjExMDBaFw0z
+MzA2MTkxNjExMDBaMHExCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlh
+MRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMQ4wDAYDVQQLEwVhZG1pbjElMCMGA1UE
+AwwcQWRtaW5Ab3JnMS5jb252ZXJnZW5jaWF4LmNvbTBZMBMGByqGSM49AgEGCCqG
+SM49AwEHA0IABBcI8sAr1BibvIx+c5O6Rh5Kb1BfKMSVO9M4slJntacSO/w2bB1g
+8Tj3/APxldaD7Rzt0OUrJz7AzjGAEpDAw5yjTTBLMA4GA1UdDwEB/wQEAwIHgDAM
+BgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIOAVu5JWbbz5uExDDzWjyQ+K2efAV617
+YumR8v+w7ikLMAoGCCqGSM49BAMCA0cAMEQCIG/tDJRXrF/OAYaa2sH2O8lIi5bX
+r2myWYrL6zYwZ4LdAiBcPPZWMm/Eyv921kg3PtLAYZcfEv9WvmNbv1251Z6LUw==
+-----END CERTIFICATE-----
+2023-06-22 16:54:14.796 UTC [msp.identity] newIdentity -> DEBU 018 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICOjCCAeGgAwIBAgIQcbnZDYNjbwGQvm7fndfDiDAKBggqhkjOPQQDAjB/MQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzEfMB0GA1UEChMWb3JnMS5jb252ZXJnZW5jaWF4LmNvbTEiMCAGA1UE
+AxMZY2Eub3JnMS5jb252ZXJnZW5jaWF4LmNvbTAeFw0yMzA2MjIxNjExMDBaFw0z
+MzA2MTkxNjExMDBaMHExCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlh
+MRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMQ4wDAYDVQQLEwVhZG1pbjElMCMGA1UE
+AwwcQWRtaW5Ab3JnMS5jb252ZXJnZW5jaWF4LmNvbTBZMBMGByqGSM49AgEGCCqG
+SM49AwEHA0IABBcI8sAr1BibvIx+c5O6Rh5Kb1BfKMSVO9M4slJntacSO/w2bB1g
+8Tj3/APxldaD7Rzt0OUrJz7AzjGAEpDAw5yjTTBLMA4GA1UdDwEB/wQEAwIHgDAM
+BgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIOAVu5JWbbz5uExDDzWjyQ+K2efAV617
+YumR8v+w7ikLMAoGCCqGSM49BAMCA0cAMEQCIG/tDJRXrF/OAYaa2sH2O8lIi5bX
+r2myWYrL6zYwZ4LdAiBcPPZWMm/Eyv921kg3PtLAYZcfEv9WvmNbv1251Z6LUw==
+-----END CERTIFICATE-----
+2023-06-22 16:54:14.798 UTC [msp] setupSigningIdentity -> DEBU 019 Signing identity expires at 2033-06-19 16:11:00 +0000 UTC
+2023-06-22 16:54:14.803 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a Obtaining default signing identity
+2023-06-22 16:54:14.803 UTC [grpc] WithKeepaliveParams -> DEBU 01b Adjusting keepalive ping interval to minimum period of 10s
+2023-06-22 16:54:14.812 UTC [grpc] Infof -> DEBU 01c parsed scheme: ""
+2023-06-22 16:54:14.814 UTC [grpc] Infof -> DEBU 01d scheme "" not registered, fallback to default scheme
+2023-06-22 16:54:14.817 UTC [grpc] Infof -> DEBU 01e ccResolverWrapper: sending update to cc: {[{orderer.convergenciax.com:7050  <nil> 0 <nil>}] <nil> <nil>}
+2023-06-22 16:54:14.817 UTC [grpc] Infof -> DEBU 01f ClientConn switching balancer to "pick_first"
+2023-06-22 16:54:14.817 UTC [grpc] Infof -> DEBU 020 Channel switches to new LB policy "pick_first"
+2023-06-22 16:54:14.818 UTC [grpc] Infof -> DEBU 021 Subchannel Connectivity change to CONNECTING
+2023-06-22 16:54:14.818 UTC [grpc] Infof -> DEBU 022 Subchannel picks a new address "orderer.convergenciax.com:7050" to connect
+2023-06-22 16:54:14.818 UTC [grpc] UpdateSubConnState -> DEBU 023 pickfirstBalancer: HandleSubConnStateChange: 0xc0005d5f40, {CONNECTING <nil>}
+2023-06-22 16:54:14.818 UTC [grpc] Infof -> DEBU 024 Channel Connectivity change to CONNECTING
+2023-06-22 16:54:14.853 UTC [grpc] Infof -> DEBU 025 Subchannel Connectivity change to READY
+2023-06-22 16:54:14.854 UTC [grpc] UpdateSubConnState -> DEBU 026 pickfirstBalancer: HandleSubConnStateChange: 0xc0005d5f40, {READY <nil>}
+2023-06-22 16:54:14.854 UTC [grpc] Infof -> DEBU 027 Channel Connectivity change to READY
+2023-06-22 16:54:14.854 UTC [channelCmd] InitCmdFactory -> INFO 028 Endorser and orderer connections initialized
+2023-06-22 16:54:14.854 UTC [msp.identity] Sign -> DEBU 029 Sign: plaintext: 0ACE060A074F7267314D535012C2062D...53616D706C65436F6E736F727469756D 
+2023-06-22 16:54:14.855 UTC [msp.identity] Sign -> DEBU 02a Sign: digest: 3FCA42632A3933C9B2DCFE971304C37803B4C870144D099B25FB7CB9E9298527 
+2023-06-22 16:54:14.861 UTC [msp.identity] Sign -> DEBU 02b Sign: plaintext: 0A87070A1708021A0608B6F9D1A40622...3BCFB7540798BAEF48A5C58ADEF7477F 
+2023-06-22 16:54:14.861 UTC [msp.identity] Sign -> DEBU 02c Sign: digest: E9DA2AA0A4A904D4F8A09F4D21234C8F3FCEB97A2A8B2067818A739EB3B50737 
+2023-06-22 16:54:14.862 UTC [grpc] WithKeepaliveParams -> DEBU 02d Adjusting keepalive ping interval to minimum period of 10s
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 02e parsed scheme: ""
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 02f scheme "" not registered, fallback to default scheme
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 030 ccResolverWrapper: sending update to cc: {[{orderer.convergenciax.com:7050  <nil> 0 <nil>}] <nil> <nil>}
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 031 ClientConn switching balancer to "pick_first"
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 032 Channel switches to new LB policy "pick_first"
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 033 Subchannel Connectivity change to CONNECTING
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 034 Subchannel picks a new address "orderer.convergenciax.com:7050" to connect
+2023-06-22 16:54:14.862 UTC [grpc] UpdateSubConnState -> DEBU 035 pickfirstBalancer: HandleSubConnStateChange: 0xc0001f73d0, {CONNECTING <nil>}
+2023-06-22 16:54:14.862 UTC [grpc] Infof -> DEBU 036 Channel Connectivity change to CONNECTING
+2023-06-22 16:54:14.867 UTC [grpc] Infof -> DEBU 037 Subchannel Connectivity change to READY
+2023-06-22 16:54:14.867 UTC [grpc] UpdateSubConnState -> DEBU 038 pickfirstBalancer: HandleSubConnStateChange: 0xc0001f73d0, {READY <nil>}
+2023-06-22 16:54:14.867 UTC [grpc] Infof -> DEBU 039 Channel Connectivity change to READY
+2023-06-22 16:54:14.897 UTC [msp.identity] Sign -> DEBU 03a Sign: plaintext: 0A87070A1708051A0608B6F9D1A40622...DD70D6D039AD12080A021A0012021A00 
+2023-06-22 16:54:14.898 UTC [msp.identity] Sign -> DEBU 03b Sign: digest: 70CC1424708B885A9F631EACB7CD11BBC92633FE516D9C939E35FFE4515A94C1 
+2023-06-22 16:54:14.943 UTC [cli.common] readBlock -> INFO 03c Received block: 0
+bash-5.0# ls -lasrt
+total 44
+     4 drwxr-xr-x    4 1000     1000          4096 Jun 22 16:16 crypto
+     4 drwxr-x---    2 1000     1000          4096 Jun 22 16:16 channel-artifacts
+     4 drwxr-xr-x    3 root     root          4096 Jun 22 16:25 ..
+    28 -rw-r--r--    1 root     root         27444 Jun 22 16:54 marketplace.block
+     4 drwxr-xr-x    4 root     root          4096 Jun 22 16:54 .
+bash-5.0# 
+
+#Resultado - Se creo marketplace.block
+
+##
+# Paso 2 - agregar Or1 al canal marketplace, se deben configurar las variables de ambiente
+##
+
+# agregar la primera organizacioon Org1MSP, donde usa los valores de las varables $CORE_PEER_MSPCONFIGPATH, 
+# $CORE_PEER_ADDRESS, $CORE_PEER_LOCALMSPID y CORE_PEER_TLS_ROOTCERT_FILE
+# Ya tiene configurado las variables de ambiente CORE_PEER_MSPCONFIGPATHm CORE_PEER_ADDRESS, CORE_PEER_LOCALMSPID y 
+# CORE_PEER_TLS_ROOTCERT_FILE que referencian a cada organizacion
+
+
+
+k
+     4 drwxr-xr-x    4 root     root          4096 Jun 22 16:54 .
+bash-5.0# peer channel join -b marketplace.block
+2023-06-22 16:59:15.711 UTC [bccsp] GetDefault -> DEBU 001 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 16:59:15.726 UTC [bccsp] GetDefault -> DEBU 002 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 16:59:15.729 UTC [bccsp_sw] openKeyStore -> DEBU 003 KeyStore opened at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/keystore]...done
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 004 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/signcerts
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 005 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/signcerts/Admin@org1.convergenciax.com-cert.pem
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 006 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/cacerts
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 007 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/cacerts/ca.org1.convergenciax.com-cert.pem
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 008 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/admincerts
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 009 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/intermediatecerts
+2023-06-22 16:59:15.730 UTC [msp] getMspConfig -> DEBU 00a Intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/intermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/intermediatecerts: no such file or directory]
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 00b Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlscacerts
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 00c Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlscacerts/tlsca.org1.convergenciax.com-cert.pem
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 00d Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlsintermediatecerts
+2023-06-22 16:59:15.730 UTC [msp] getMspConfig -> DEBU 00e TLS intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlsintermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/tlsintermediatecerts: no such file or directory]
+2023-06-22 16:59:15.730 UTC [msp] getPemMaterialFromDir -> DEBU 00f Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/crls
+2023-06-22 16:59:15.730 UTC [msp] getMspConfig -> DEBU 010 crls folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/crls]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.convergenciax.com/users/Admin@org1.convergenciax.com/msp/crls: no such file or directory]
+2023-06-22 16:59:15.730 UTC [msp] getMspConfig -> DEBU 011 Loading NodeOUs
+2023-06-22 16:59:15.731 UTC [msp] newBccspMsp -> DEBU 012 Creating BCCSP-based MSP instance
+2023-06-22 16:59:15.732 UTC [msp] New -> DEBU 013 Creating Cache-MSP instance
+2023-06-22 16:59:15.733 UTC [msp] loadLocalMSP -> DEBU 014 Created new local MSP
+2023-06-22 16:59:15.733 UTC [msp] Setup -> DEBU 015 Setting up MSP instance Org1MSP
+2023-06-22 16:59:15.733 UTC [msp.identity] newIdentity -> DEBU 016 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICajCCAg+gAwIBAgIQQsfEwi4+ewwVPzVpgGSMEzAKBggqhkjOPQQDAjB/MQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzEfMB0GA1UEChMWb3JnMS5jb252ZXJnZW5jaWF4LmNvbTEiMCAGA1UE
+AxMZY2Eub3JnMS5jb252ZXJnZW5jaWF4LmNvbTAeFw0yMzA2MjIxNjExMDBaFw0z
+MzA2MTkxNjExMDBaMH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlh
+MRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZvcmcxLmNvbnZlcmdl
+bmNpYXguY29tMSIwIAYDVQQDExljYS5vcmcxLmNvbnZlcmdlbmNpYXguY29tMFkw
+EwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEqpm28bj7J3mwXnNF6AWK5Ufk3j+JG12M
+03gHA3leg2JiOVXvsOkXgTNIOK6CADGSgBLePaxlqFoKkU3oEMSKkqNtMGswDgYD
+VR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNV
+HRMBAf8EBTADAQH/MCkGA1UdDgQiBCDgFbuSVm28+bhMQw81o8kPitnnwFete2Lp
+kfL/sO4pCzAKBggqhkjOPQQDAgNJADBGAiEAwKY/qf6CrfkXMPlN9hCA5MfPPW9L
+QJE/rDiAFeEN6tMCIQCJimmPYmOwdjzLYDeFrgDF0o2XPfQPi/N3Bmhii4A5mQ==
+-----END CERTIFICATE-----
+2023-06-22 16:59:15.734 UTC [msp.identity] newIdentity -> DEBU 017 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICOjCCAeGgAwIBAgIQcbnZDYNjbwGQvm7fndfDiDAKBggqhkjOPQQDAjB/MQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzEfMB0GA1UEChMWb3JnMS5jb252ZXJnZW5jaWF4LmNvbTEiMCAGA1UE
+AxMZY2Eub3JnMS5jb252ZXJnZW5jaWF4LmNvbTAeFw0yMzA2MjIxNjExMDBaFw0z
+MzA2MTkxNjExMDBaMHExCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlh
+MRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMQ4wDAYDVQQLEwVhZG1pbjElMCMGA1UE
+AwwcQWRtaW5Ab3JnMS5jb252ZXJnZW5jaWF4LmNvbTBZMBMGByqGSM49AgEGCCqG
+SM49AwEHA0IABBcI8sAr1BibvIx+c5O6Rh5Kb1BfKMSVO9M4slJntacSO/w2bB1g
+8Tj3/APxldaD7Rzt0OUrJz7AzjGAEpDAw5yjTTBLMA4GA1UdDwEB/wQEAwIHgDAM
+BgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIOAVu5JWbbz5uExDDzWjyQ+K2efAV617
+YumR8v+w7ikLMAoGCCqGSM49BAMCA0cAMEQCIG/tDJRXrF/OAYaa2sH2O8lIi5bX
+r2myWYrL6zYwZ4LdAiBcPPZWMm/Eyv921kg3PtLAYZcfEv9WvmNbv1251Z6LUw==
+-----END CERTIFICATE-----
+2023-06-22 16:59:15.734 UTC [msp.identity] newIdentity -> DEBU 018 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICOjCCAeGgAwIBAgIQcbnZDYNjbwGQvm7fndfDiDAKBggqhkjOPQQDAjB/MQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzEfMB0GA1UEChMWb3JnMS5jb252ZXJnZW5jaWF4LmNvbTEiMCAGA1UE
+AxMZY2Eub3JnMS5jb252ZXJnZW5jaWF4LmNvbTAeFw0yMzA2MjIxNjExMDBaFw0z
+MzA2MTkxNjExMDBaMHExCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlh
+MRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMQ4wDAYDVQQLEwVhZG1pbjElMCMGA1UE
+AwwcQWRtaW5Ab3JnMS5jb252ZXJnZW5jaWF4LmNvbTBZMBMGByqGSM49AgEGCCqG
+SM49AwEHA0IABBcI8sAr1BibvIx+c5O6Rh5Kb1BfKMSVO9M4slJntacSO/w2bB1g
+8Tj3/APxldaD7Rzt0OUrJz7AzjGAEpDAw5yjTTBLMA4GA1UdDwEB/wQEAwIHgDAM
+BgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIOAVu5JWbbz5uExDDzWjyQ+K2efAV617
+YumR8v+w7ikLMAoGCCqGSM49BAMCA0cAMEQCIG/tDJRXrF/OAYaa2sH2O8lIi5bX
+r2myWYrL6zYwZ4LdAiBcPPZWMm/Eyv921kg3PtLAYZcfEv9WvmNbv1251Z6LUw==
+-----END CERTIFICATE-----
+2023-06-22 16:59:15.736 UTC [msp] setupSigningIdentity -> DEBU 019 Signing identity expires at 2033-06-19 16:11:00 +0000 UTC
+2023-06-22 16:59:15.738 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a Obtaining default signing identity
+2023-06-22 16:59:15.739 UTC [grpc] Infof -> DEBU 01b parsed scheme: ""
+2023-06-22 16:59:15.740 UTC [grpc] Infof -> DEBU 01c scheme "" not registered, fallback to default scheme
+2023-06-22 16:59:15.740 UTC [grpc] Infof -> DEBU 01d ccResolverWrapper: sending update to cc: {[{peer0.org1.convergenciax.com:7051  <nil> 0 <nil>}] <nil> <nil>}
+2023-06-22 16:59:15.740 UTC [grpc] Infof -> DEBU 01e ClientConn switching balancer to "pick_first"
+2023-06-22 16:59:15.740 UTC [grpc] Infof -> DEBU 01f Channel switches to new LB policy "pick_first"
+2023-06-22 16:59:15.740 UTC [grpc] Infof -> DEBU 020 Subchannel Connectivity change to CONNECTING
+2023-06-22 16:59:15.740 UTC [grpc] UpdateSubConnState -> DEBU 022 pickfirstBalancer: HandleSubConnStateChange: 0xc0004bfd60, {CONNECTING <nil>}
+2023-06-22 16:59:15.741 UTC [grpc] Infof -> DEBU 023 Channel Connectivity change to CONNECTING
+2023-06-22 16:59:15.740 UTC [grpc] Infof -> DEBU 021 Subchannel picks a new address "peer0.org1.convergenciax.com:7051" to connect
+2023-06-22 16:59:15.766 UTC [grpc] Infof -> DEBU 024 Subchannel Connectivity change to READY
+2023-06-22 16:59:15.766 UTC [grpc] UpdateSubConnState -> DEBU 025 pickfirstBalancer: HandleSubConnStateChange: 0xc0004bfd60, {READY <nil>}
+2023-06-22 16:59:15.766 UTC [grpc] Infof -> DEBU 026 Channel Connectivity change to READY
+2023-06-22 16:59:15.766 UTC [channelCmd] InitCmdFactory -> INFO 027 Endorser and orderer connections initialized
+2023-06-22 16:59:15.771 UTC [msp.identity] Sign -> DEBU 028 Sign: plaintext: 0ACC070A5C08011A0C08E3FBD1A40610...59A1A9CD1A0A0A000A000A000A000A00 
+2023-06-22 16:59:15.771 UTC [msp.identity] Sign -> DEBU 029 Sign: digest: 904D146AD9C939725F917E68AEAE93FF4D915C33B03CA74220282C83C658E274 
+2023-06-22 16:59:16.326 UTC [channelCmd] executeJoin -> INFO 02a Successfully submitted proposal to join channel
+bash-5.0# 
+
+
+
+
+####
+# Paso 3 - agregar Org2 al canal marketplace, se deben configurar las variables de ambiente $CORE_PEER_MSPCONFIGPATH,
+# $CORE_PEER_ADDRESS, $CORE_PEER_LOCALMSPID y CORE_PEER_TLS_ROOTCERT_FILE para que se asuma la Organizacion 2.
+#
+####
+
+bash-5.0# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp
+bash-5.0# export CORE_PEER_ADDRESS=peer0.org2.convergenciax.com:7051
+bash-5.0# export CORE_PEER_LOCALMSPID="Org2MSP"
+bash-5.0# export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/peers/peer0.org2.convergenciax.com/tls/ca.crt
+bash-5.0# peer channel join -b marketplace.block
+2023-06-22 17:02:37.775 UTC [bccsp] GetDefault -> DEBU 001 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 17:02:37.793 UTC [bccsp] GetDefault -> DEBU 002 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 17:02:37.796 UTC [bccsp_sw] openKeyStore -> DEBU 003 KeyStore opened at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/keystore]...done
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 004 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/signcerts
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 005 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/signcerts/Admin@org2.convergenciax.com-cert.pem
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 006 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/cacerts
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 007 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/cacerts/ca.org2.convergenciax.com-cert.pem
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 008 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/admincerts
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 009 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/intermediatecerts
+2023-06-22 17:02:37.796 UTC [msp] getMspConfig -> DEBU 00a Intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/intermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/intermediatecerts: no such file or directory]
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 00b Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/tlscacerts
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 00c Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/tlscacerts/tlsca.org2.convergenciax.com-cert.pem
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 00d Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/tlsintermediatecerts
+2023-06-22 17:02:37.796 UTC [msp] getMspConfig -> DEBU 00e TLS intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/tlsintermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/tlsintermediatecerts: no such file or directory]
+2023-06-22 17:02:37.796 UTC [msp] getPemMaterialFromDir -> DEBU 00f Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/crls
+2023-06-22 17:02:37.796 UTC [msp] getMspConfig -> DEBU 010 crls folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/crls]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.convergenciax.com/users/Admin@org2.convergenciax.com/msp/crls: no such file or directory]
+2023-06-22 17:02:37.797 UTC [msp] getMspConfig -> DEBU 011 Loading NodeOUs
+2023-06-22 17:02:37.797 UTC [msp] newBccspMsp -> DEBU 012 Creating BCCSP-based MSP instance
+2023-06-22 17:02:37.797 UTC [msp] New -> DEBU 013 Creating Cache-MSP instance
+2023-06-22 17:02:37.803 UTC [msp] loadLocalMSP -> DEBU 014 Created new local MSP
+2023-06-22 17:02:37.808 UTC [msp] Setup -> DEBU 015 Setting up MSP instance Org2MSP
+2023-06-22 17:02:37.810 UTC [msp.identity] newIdentity -> DEBU 016 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICazCCAhCgAwIBAgIRAKjmk+tmSOcwAyeD2kNTUQUwCgYIKoZIzj0EAwIwfzEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xHzAdBgNVBAoTFm9yZzIuY29udmVyZ2VuY2lheC5jb20xIjAgBgNV
+BAMTGWNhLm9yZzIuY29udmVyZ2VuY2lheC5jb20wHhcNMjMwNjIyMTYxMTAwWhcN
+MzMwNjE5MTYxMTAwWjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5p
+YTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWb3JnMi5jb252ZXJn
+ZW5jaWF4LmNvbTEiMCAGA1UEAxMZY2Eub3JnMi5jb252ZXJnZW5jaWF4LmNvbTBZ
+MBMGByqGSM49AgEGCCqGSM49AwEHA0IABDhpEjnwbOK0c5TNL0uceyGrtlDx2rq1
+DN1Kd8fT78Vm3kqPR/JLvgD8hEQgdXz5l6vBYg8b/HRalb8SH9VueDOjbTBrMA4G
+A1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYD
+VR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgwRzfMr7RIqe2R3qOFnLedBPMJzioIhuI
+HnB2RcVpoYUwCgYIKoZIzj0EAwIDSQAwRgIhAPsJa9ylHSlwHUOp4OJYpiCeKIp1
+4oHav14BRMi0LidMAiEArKUSgk/ep/nrSNG/9V4ORRpCvbzD9V3COzPxNcnJT0c=
+-----END CERTIFICATE-----
+2023-06-22 17:02:37.811 UTC [msp.identity] newIdentity -> DEBU 017 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICPDCCAeKgAwIBAgIRAIPHh3ynHahHHP+O5Vdw0lEwCgYIKoZIzj0EAwIwfzEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xHzAdBgNVBAoTFm9yZzIuY29udmVyZ2VuY2lheC5jb20xIjAgBgNV
+BAMTGWNhLm9yZzIuY29udmVyZ2VuY2lheC5jb20wHhcNMjMwNjIyMTYxMTAwWhcN
+MzMwNjE5MTYxMTAwWjBxMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5p
+YTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEOMAwGA1UECxMFYWRtaW4xJTAjBgNV
+BAMMHEFkbWluQG9yZzIuY29udmVyZ2VuY2lheC5jb20wWTATBgcqhkjOPQIBBggq
+hkjOPQMBBwNCAAQh/t49yakBTsCEK0Uo4Wp1KKd8J48B9nkN7X1qV/ubADmY2z8H
+IUe8gOkXPXive88F+eBCS6ruaAACmP118t6Po00wSzAOBgNVHQ8BAf8EBAMCB4Aw
+DAYDVR0TAQH/BAIwADArBgNVHSMEJDAigCDBHN8yvtEip7ZHeo4Wct50E8wnOKgi
+G4gecHZFxWmhhTAKBggqhkjOPQQDAgNIADBFAiEAo/ACnrSKEZ3WD3fENLzFipaF
+jI/19b0GGQkhGJrBKHgCIDxEAv2f1yRBNxOUE6WaVKyxD7VdaWlDM3Rq+qLgp8sl
+-----END CERTIFICATE-----
+2023-06-22 17:02:37.811 UTC [msp.identity] newIdentity -> DEBU 018 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICPDCCAeKgAwIBAgIRAIPHh3ynHahHHP+O5Vdw0lEwCgYIKoZIzj0EAwIwfzEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xHzAdBgNVBAoTFm9yZzIuY29udmVyZ2VuY2lheC5jb20xIjAgBgNV
+BAMTGWNhLm9yZzIuY29udmVyZ2VuY2lheC5jb20wHhcNMjMwNjIyMTYxMTAwWhcN
+MzMwNjE5MTYxMTAwWjBxMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5p
+YTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEOMAwGA1UECxMFYWRtaW4xJTAjBgNV
+BAMMHEFkbWluQG9yZzIuY29udmVyZ2VuY2lheC5jb20wWTATBgcqhkjOPQIBBggq
+hkjOPQMBBwNCAAQh/t49yakBTsCEK0Uo4Wp1KKd8J48B9nkN7X1qV/ubADmY2z8H
+IUe8gOkXPXive88F+eBCS6ruaAACmP118t6Po00wSzAOBgNVHQ8BAf8EBAMCB4Aw
+DAYDVR0TAQH/BAIwADArBgNVHSMEJDAigCDBHN8yvtEip7ZHeo4Wct50E8wnOKgi
+G4gecHZFxWmhhTAKBggqhkjOPQQDAgNIADBFAiEAo/ACnrSKEZ3WD3fENLzFipaF
+jI/19b0GGQkhGJrBKHgCIDxEAv2f1yRBNxOUE6WaVKyxD7VdaWlDM3Rq+qLgp8sl
+-----END CERTIFICATE-----
+2023-06-22 17:02:37.814 UTC [msp] setupSigningIdentity -> DEBU 019 Signing identity expires at 2033-06-19 16:11:00 +0000 UTC
+2023-06-22 17:02:37.815 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a Obtaining default signing identity
+2023-06-22 17:02:37.816 UTC [grpc] Infof -> DEBU 01b parsed scheme: ""
+2023-06-22 17:02:37.816 UTC [grpc] Infof -> DEBU 01c scheme "" not registered, fallback to default scheme
+2023-06-22 17:02:37.816 UTC [grpc] Infof -> DEBU 01d ccResolverWrapper: sending update to cc: {[{peer0.org2.convergenciax.com:7051  <nil> 0 <nil>}] <nil> <nil>}
+2023-06-22 17:02:37.816 UTC [grpc] Infof -> DEBU 01e ClientConn switching balancer to "pick_first"
+2023-06-22 17:02:37.816 UTC [grpc] Infof -> DEBU 01f Channel switches to new LB policy "pick_first"
+2023-06-22 17:02:37.816 UTC [grpc] Infof -> DEBU 020 Subchannel Connectivity change to CONNECTING
+2023-06-22 17:02:37.817 UTC [grpc] Infof -> DEBU 021 Subchannel picks a new address "peer0.org2.convergenciax.com:7051" to connect
+2023-06-22 17:02:37.818 UTC [grpc] UpdateSubConnState -> DEBU 022 pickfirstBalancer: HandleSubConnStateChange: 0xc000455e40, {CONNECTING <nil>}
+2023-06-22 17:02:37.818 UTC [grpc] Infof -> DEBU 023 Channel Connectivity change to CONNECTING
+2023-06-22 17:02:37.826 UTC [grpc] Infof -> DEBU 024 Subchannel Connectivity change to READY
+2023-06-22 17:02:37.826 UTC [grpc] UpdateSubConnState -> DEBU 025 pickfirstBalancer: HandleSubConnStateChange: 0xc000455e40, {READY <nil>}
+2023-06-22 17:02:37.826 UTC [grpc] Infof -> DEBU 026 Channel Connectivity change to READY
+2023-06-22 17:02:37.826 UTC [channelCmd] InitCmdFactory -> INFO 027 Endorser and orderer connections initialized
+2023-06-22 17:02:37.827 UTC [msp.identity] Sign -> DEBU 028 Sign: plaintext: 0ACC070A5C08011A0C08ADFDD1A40610...59A1A9CD1A0A0A000A000A000A000A00 
+2023-06-22 17:02:37.827 UTC [msp.identity] Sign -> DEBU 029 Sign: digest: EB30865735930B0453D0E18DF46D8BFDD5C03F6E8AC45FF98FDFDD97B4B7E1D2 
+2023-06-22 17:02:38.394 UTC [channelCmd] executeJoin -> INFO 02a Successfully submitted proposal to join channel
+bash-5.0# 
+bash-5.0# 
+
+
+
+
+
+
+####
+# Paso 4 - agregar Org3 al canal marketplace, se deben configurar las variables de ambiente $CORE_PEER_MSPCONFIGPATH,
+# $CORE_PEER_ADDRESS, $CORE_PEER_LOCALMSPID y CORE_PEER_TLS_ROOTCERT_FILE para que se asuma la Organizacion 3.
+#
+####
+
+bash-5.0# 
+bash-5.0# 
+bash-5.0# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp
+bash-5.0# export CORE_PEER_ADDRESS=peer0.org3.convergenciax.com:7051
+bash-5.0# export CORE_PEER_LOCALMSPID="Org3MSP"
+bash-5.0# export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/peers/peer0.org3.convergenciax.com/tls/ca.crt
+bash-5.0# 
+bash-5.0#  peer channel join -b marketplace.block
+2023-06-22 17:03:38.780 UTC [bccsp] GetDefault -> DEBU 001 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 17:03:38.798 UTC [bccsp] GetDefault -> DEBU 002 Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+2023-06-22 17:03:38.803 UTC [bccsp_sw] openKeyStore -> DEBU 003 KeyStore opened at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/keystore]...done
+2023-06-22 17:03:38.803 UTC [msp] getPemMaterialFromDir -> DEBU 004 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/signcerts
+2023-06-22 17:03:38.803 UTC [msp] getPemMaterialFromDir -> DEBU 005 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/signcerts/Admin@org3.convergenciax.com-cert.pem
+2023-06-22 17:03:38.803 UTC [msp] getPemMaterialFromDir -> DEBU 006 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/cacerts
+2023-06-22 17:03:38.803 UTC [msp] getPemMaterialFromDir -> DEBU 007 Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/cacerts/ca.org3.convergenciax.com-cert.pem
+2023-06-22 17:03:38.803 UTC [msp] getPemMaterialFromDir -> DEBU 008 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/admincerts
+2023-06-22 17:03:38.803 UTC [msp] getPemMaterialFromDir -> DEBU 009 Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/intermediatecerts
+2023-06-22 17:03:38.804 UTC [msp] getMspConfig -> DEBU 00a Intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/intermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/intermediatecerts: no such file or directory]
+2023-06-22 17:03:38.804 UTC [msp] getPemMaterialFromDir -> DEBU 00b Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/tlscacerts
+2023-06-22 17:03:38.804 UTC [msp] getPemMaterialFromDir -> DEBU 00c Inspecting file /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/tlscacerts/tlsca.org3.convergenciax.com-cert.pem
+2023-06-22 17:03:38.804 UTC [msp] getPemMaterialFromDir -> DEBU 00d Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/tlsintermediatecerts
+2023-06-22 17:03:38.804 UTC [msp] getMspConfig -> DEBU 00e TLS intermediate certs folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/tlsintermediatecerts]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/tlsintermediatecerts: no such file or directory]
+2023-06-22 17:03:38.804 UTC [msp] getPemMaterialFromDir -> DEBU 00f Reading directory /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/crls
+2023-06-22 17:03:38.804 UTC [msp] getMspConfig -> DEBU 010 crls folder not found at [/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/crls]. Skipping. [stat /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.convergenciax.com/users/Admin@org3.convergenciax.com/msp/crls: no such file or directory]
+2023-06-22 17:03:38.805 UTC [msp] getMspConfig -> DEBU 011 Loading NodeOUs
+2023-06-22 17:03:38.806 UTC [msp] newBccspMsp -> DEBU 012 Creating BCCSP-based MSP instance
+2023-06-22 17:03:38.806 UTC [msp] New -> DEBU 013 Creating Cache-MSP instance
+2023-06-22 17:03:38.806 UTC [msp] loadLocalMSP -> DEBU 014 Created new local MSP
+2023-06-22 17:03:38.806 UTC [msp] Setup -> DEBU 015 Setting up MSP instance Org3MSP
+2023-06-22 17:03:38.806 UTC [msp.identity] newIdentity -> DEBU 016 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICajCCAg+gAwIBAgIQQF8Z4cjXPoOAyZpcZHWWgDAKBggqhkjOPQQDAjB/MQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzEfMB0GA1UEChMWb3JnMy5jb252ZXJnZW5jaWF4LmNvbTEiMCAGA1UE
+AxMZY2Eub3JnMy5jb252ZXJnZW5jaWF4LmNvbTAeFw0yMzA2MjIxNjExMDBaFw0z
+MzA2MTkxNjExMDBaMH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlh
+MRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZvcmczLmNvbnZlcmdl
+bmNpYXguY29tMSIwIAYDVQQDExljYS5vcmczLmNvbnZlcmdlbmNpYXguY29tMFkw
+EwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3ZsqSgQhcqo1QAOx6tEJvENk/e0RXypn
+8wgaswwIbkqpa2tlfKlNicfR+7OM7RAONuwqaywxCBQbiHJjYJKnKaNtMGswDgYD
+VR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNV
+HRMBAf8EBTADAQH/MCkGA1UdDgQiBCDLaoDSXzXmEu4bkqRnSFsL9jTh+gK1VWEI
+Djz2zO4jxTAKBggqhkjOPQQDAgNJADBGAiEAj+4U77dJcctZk3ot4apxBz9BqU3k
+6VIkYMLE04sCLwUCIQD8P9mn352yYV4pxHeOgJjiXwogSDshJUOyNp2z1PNXxg==
+-----END CERTIFICATE-----
+2023-06-22 17:03:38.806 UTC [msp.identity] newIdentity -> DEBU 017 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICOzCCAeKgAwIBAgIRAP3x8yc+f8GMw8Ke+nyJsDYwCgYIKoZIzj0EAwIwfzEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xHzAdBgNVBAoTFm9yZzMuY29udmVyZ2VuY2lheC5jb20xIjAgBgNV
+BAMTGWNhLm9yZzMuY29udmVyZ2VuY2lheC5jb20wHhcNMjMwNjIyMTYxMTAwWhcN
+MzMwNjE5MTYxMTAwWjBxMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5p
+YTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEOMAwGA1UECxMFYWRtaW4xJTAjBgNV
+BAMMHEFkbWluQG9yZzMuY29udmVyZ2VuY2lheC5jb20wWTATBgcqhkjOPQIBBggq
+hkjOPQMBBwNCAASB0eJL+X/ObeQlkDjYbt5a9NdbrhndWV0qaNlJ8k9q+eVrvdy7
+akZLEN6cLr3Etl/9f0F4hJYVkrZr+UDoQaRto00wSzAOBgNVHQ8BAf8EBAMCB4Aw
+DAYDVR0TAQH/BAIwADArBgNVHSMEJDAigCDLaoDSXzXmEu4bkqRnSFsL9jTh+gK1
+VWEIDjz2zO4jxTAKBggqhkjOPQQDAgNHADBEAiAMXovHe2VgYh8ua8ml4PFuZHWD
+HZLDEk0hw/MVvan+MgIgVlqUpniwD0mGkyfYfU0zzNCEZONSBFhrWL0rXXKZUBc=
+-----END CERTIFICATE-----
+2023-06-22 17:03:38.809 UTC [msp.identity] newIdentity -> DEBU 018 Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICOzCCAeKgAwIBAgIRAP3x8yc+f8GMw8Ke+nyJsDYwCgYIKoZIzj0EAwIwfzEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xHzAdBgNVBAoTFm9yZzMuY29udmVyZ2VuY2lheC5jb20xIjAgBgNV
+BAMTGWNhLm9yZzMuY29udmVyZ2VuY2lheC5jb20wHhcNMjMwNjIyMTYxMTAwWhcN
+MzMwNjE5MTYxMTAwWjBxMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5p
+YTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEOMAwGA1UECxMFYWRtaW4xJTAjBgNV
+BAMMHEFkbWluQG9yZzMuY29udmVyZ2VuY2lheC5jb20wWTATBgcqhkjOPQIBBggq
+hkjOPQMBBwNCAASB0eJL+X/ObeQlkDjYbt5a9NdbrhndWV0qaNlJ8k9q+eVrvdy7
+akZLEN6cLr3Etl/9f0F4hJYVkrZr+UDoQaRto00wSzAOBgNVHQ8BAf8EBAMCB4Aw
+DAYDVR0TAQH/BAIwADArBgNVHSMEJDAigCDLaoDSXzXmEu4bkqRnSFsL9jTh+gK1
+VWEIDjz2zO4jxTAKBggqhkjOPQQDAgNHADBEAiAMXovHe2VgYh8ua8ml4PFuZHWD
+HZLDEk0hw/MVvan+MgIgVlqUpniwD0mGkyfYfU0zzNCEZONSBFhrWL0rXXKZUBc=
+-----END CERTIFICATE-----
+2023-06-22 17:03:38.814 UTC [msp] setupSigningIdentity -> DEBU 019 Signing identity expires at 2033-06-19 16:11:00 +0000 UTC
+2023-06-22 17:03:38.818 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a Obtaining default signing identity
+2023-06-22 17:03:38.823 UTC [grpc] Infof -> DEBU 01b parsed scheme: ""
+2023-06-22 17:03:38.823 UTC [grpc] Infof -> DEBU 01c scheme "" not registered, fallback to default scheme
+2023-06-22 17:03:38.823 UTC [grpc] Infof -> DEBU 01d ccResolverWrapper: sending update to cc: {[{peer0.org3.convergenciax.com:7051  <nil> 0 <nil>}] <nil> <nil>}
+2023-06-22 17:03:38.823 UTC [grpc] Infof -> DEBU 01e ClientConn switching balancer to "pick_first"
+2023-06-22 17:03:38.823 UTC [grpc] Infof -> DEBU 01f Channel switches to new LB policy "pick_first"
+2023-06-22 17:03:38.823 UTC [grpc] Infof -> DEBU 020 Subchannel Connectivity change to CONNECTING
+2023-06-22 17:03:38.823 UTC [grpc] Infof -> DEBU 021 Subchannel picks a new address "peer0.org3.convergenciax.com:7051" to connect
+2023-06-22 17:03:38.823 UTC [grpc] UpdateSubConnState -> DEBU 022 pickfirstBalancer: HandleSubConnStateChange: 0xc00051c410, {CONNECTING <nil>}
+2023-06-22 17:03:38.825 UTC [grpc] Infof -> DEBU 023 Channel Connectivity change to CONNECTING
+2023-06-22 17:03:38.837 UTC [grpc] Infof -> DEBU 024 Subchannel Connectivity change to READY
+2023-06-22 17:03:38.837 UTC [grpc] UpdateSubConnState -> DEBU 025 pickfirstBalancer: HandleSubConnStateChange: 0xc00051c410, {READY <nil>}
+2023-06-22 17:03:38.837 UTC [grpc] Infof -> DEBU 026 Channel Connectivity change to READY
+2023-06-22 17:03:38.837 UTC [channelCmd] InitCmdFactory -> INFO 027 Endorser and orderer connections initialized
+2023-06-22 17:03:38.838 UTC [msp.identity] Sign -> DEBU 028 Sign: plaintext: 0ACC070A5C08011A0C08EAFDD1A40610...59A1A9CD1A0A0A000A000A000A000A00 
+2023-06-22 17:03:38.839 UTC [msp.identity] Sign -> DEBU 029 Sign: digest: 39EB4C0CCEC3C4A39BC79371CDFBAD952243BB09D508DD0D2280F7059830E93D 
+2023-06-22 17:03:39.395 UTC [channelCmd] executeJoin -> INFO 02a Successfully submitted proposal to join channel
+bash-5.0# 
+
+
+###
+# Estado de los docker
+###
+jcotrado@convergencia2:~/HLFconvergenciax/convergenciax-network$ docker ps
+CONTAINER ID   IMAGE                               COMMAND                  CREATED          STATUS          PORTS                                                                                            NAMES
+1dda74b3824c   portainer/portainer                 "/portainer"             28 minutes ago   Up 28 minutes   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:9000->9000/tcp, :::9000->9000/tcp, 9443/tcp   wizardly_hopper
+d6ec10fb3b8d   hyperledger/fabric-tools:latest     "/bin/bash"              40 minutes ago   Up 40 minutes                                                                                                    cli
+005295b8b81b   hyperledger/fabric-peer:latest      "peer node start"        40 minutes ago   Up 40 minutes   0.0.0.0:8051->7051/tcp, :::8051->7051/tcp, 0.0.0.0:8053->7053/tcp, :::8053->7053/tcp             peer0.org2.convergenciax.com
+050cf365423c   hyperledger/fabric-peer:latest      "peer node start"        40 minutes ago   Up 40 minutes   0.0.0.0:9051->7051/tcp, :::9051->7051/tcp, 0.0.0.0:9053->7053/tcp, :::9053->7053/tcp             peer0.org3.convergenciax.com
+d6c1892398f0   hyperledger/fabric-peer:latest      "peer node start"        40 minutes ago   Up 40 minutes   0.0.0.0:7051->7051/tcp, :::7051->7051/tcp, 0.0.0.0:7053->7053/tcp, :::7053->7053/tcp             peer0.org1.convergenciax.com
+cc9b58fb9e4c   couchdb:3.1                         "tini -- /docker-ent…"   40 minutes ago   Up 40 minutes   4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp, :::5984->5984/tcp                                    couchdb0
+04538e28cad9   hyperledger/fabric-ca:latest        "sh -c 'fabric-ca-se…"   40 minutes ago   Up 40 minutes   0.0.0.0:7054->7054/tcp, :::7054->7054/tcp                                                        ca.org1.convergenciax.com
+e880f1ad5ef8   hyperledger/fabric-orderer:latest   "orderer"                40 minutes ago   Up 40 minutes   0.0.0.0:7050->7050/tcp, :::7050->7050/tcp                                                        orderer.convergenciax.com
+0b1b47b6e5df   couchdb:3.1                         "tini -- /docker-ent…"   40 minutes ago   Up 40 minutes   4369/tcp, 9100/tcp, 0.0.0.0:5985->5984/tcp, :::5985->5984/tcp                                    couchdb1
+ac3ad761316f   couchdb:3.1                         "tini -- /docker-ent…"   40 minutes ago   Up 40 minutes   4369/tcp, 9100/tcp, 0.0.0.0:5986->5984/tcp, :::5986->5984/tcp                                    couchdb2
